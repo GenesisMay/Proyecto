@@ -6,6 +6,8 @@ import { styles } from '../../theme/appTheme';
 import { SECUNDARY_COLOR } from '../../commons/constans';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ModalCar } from './components/ModalCar';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface Product {
     id: number;
@@ -23,6 +25,7 @@ export interface Car {
 }
 
 export const HomeScreen = () => {
+    const navigation = useNavigation();
     const products: Product[] = [
         { id: 1, name: 'Vestido Gala', price: 74.70, stock: 5, pathImage: 'https://taty.com.ec/wp-content/uploads/2024/08/taty_vestido_qd5196a_1-768x1024.jpg'},
         { id: 2, name: 'Vestido Primaveral', price: 84.60, stock: 3, pathImage: 'https://taty.com.ec/wp-content/uploads/2024/08/taty_vestido_dce13854_1-768x1024.jpg' },
@@ -85,6 +88,8 @@ export const HomeScreen = () => {
         }
     };
 
+    
+
     return (
         <View style={styles.containerHome}>
             <View style={styles.contentHeaderHome}>
@@ -93,16 +98,18 @@ export const HomeScreen = () => {
 
                 <View style={styles.iconCardHome}>
                     <Text style={styles.textIconCard}>{car.length}</Text>
+                    <TouchableOpacity 
+                    onPress={()=>{
+                        if (car.length > 0) {
+                            setShowModal(true);
+                        }else{
+                            navigation.dispatch(CommonActions.navigate({name:'ProductScreen'}))}}}>
                     <Icon
-                        name='shopping-cart'
-                        size={35}
-                        color={car.length > 0 ? SECUNDARY_COLOR : '#dddfe4'}
-                        onPress={() => {
-                            if (car.length > 0) {
-                                setShowModal(true);
-                            }
-                        }}
-                        disabled={car.length === 0} />
+                    name='shopping-cart'
+                    size={35}
+                    color={car.length > 0 ? SECUNDARY_COLOR : '#dddfe4'}
+                    disabled={car.length === 0} />
+                    </TouchableOpacity>
                 </View>
 
             </View>
