@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { LoginScreen } from '../screen/LoginScreen';
 import { RegisterScreen } from '../screen/RegisterScreen';
 import { HomeScreen } from '../screen/HomeScreen/HomeScreen';
+import { ProductScreen } from '../screen/ProductScreen/ProductScreen';
 
 export interface User {
     id: number;
@@ -51,6 +52,11 @@ const handleAddUser = (user: User) => {
                 name='HomeScreen'
                 options={{ headerShown: false }}
                 component={HomeScreen} />
+        
+        <Stack.Screen
+                name='Productos'
+                options={{ headerShown: false }}
+                component={ProductScreen} />
     </Stack.Navigator>
     );
 }
